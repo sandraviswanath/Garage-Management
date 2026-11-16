@@ -1,0 +1,32 @@
+<odoo>
+  <record id="job_list" model="ir.ui.view"><field name="name">workshop.job.list</field><field name="model">workshop.job</field><field name="arch" type="xml">
+    <list decoration-success="state == 'completed'"><field name="name"/><field name="partner_id"/><field name="vehicle_id"/><field name="appointment_date"/><field name="technician_id"/><field name="state" widget="badge"/></list>
+  </field></record>
+  <record id="job_form" model="ir.ui.view"><field name="name">workshop.job.form</field><field name="model">workshop.job</field><field name="arch" type="xml">
+    <form><header>
+      <button name="action_prepare_quote" type="object" string="Prepare / Open Quotation" groups="workshop_hub.group_manager" invisible="state != 'requested'"/>
+      <button name="action_request_approval" type="object" string="Request Customer Approval" groups="workshop_hub.group_manager" invisible="state != 'requested' or not sale_order_id" class="oe_highlight"/>
+      <button name="action_create_invoice" type="object" string="Create / Open Invoice" groups="workshop_hub.group_manager" invisible="state != 'completed'"/>
+      <field name="state" widget="statusbar" statusbar_visible="requested,awaiting_approval,approved,in_progress,completed"/>
+    </header><sheet><h1><field name="name"/></h1>
+      <group><group><field name="partner_id"/><field name="vehicle_id" domain="[('partner_id', '=', partner_id)]"/><field name="appointment_date"/><field name="technician_id"/></group>
+      <group><field name="company_id" groups="base.group_multi_company"/><field name="sale_order_id"/><field name="lead_id"/></group></group>
+      <field name="concern" placeholder="Reported problem and service requirements"/>
+      <notebook>
+        <page string="Inspection"><field name="checklist_ids"><list editable="bottom"><field name="name"/><field name="done"/></list></field></page>
+        <page string="Parts"><field name="part_ids"><list create="0"><field name="product_id"/><field name="quantity"/><field name="state"/><field name="picking_id"/><field name="note"/>
+          <button name="action_issue" type="object" string="Issue Quoted Delivery" groups="workshop_hub.group_manager" invisible="state != 'requested'"/>
+          <button name="action_reject" type="object" string="Reject" groups="workshop_hub.group_manager" invisible="state != 'requested'"/>
+        </list></field><p>Issuance validates the linked Sales delivery, including its other reserved products. Parts must be included in the approved quotation; no duplicate stock transfer is created.</p></page>
+        <page string="Repair Photos"><field name="photo_ids"><list><field name="name"/><field name="image" widget="image"/></list></field></page>
+      </notebook>
+    </sheet><chatter/></form>
+  </field></record>
+  <record id="vehicle_list" model="ir.ui.view"><field name="name">workshop.vehicle.list</field><field name="model">workshop.vehicle</field><field name="arch" type="xml"><list><field name="plate"/><field name="make_model"/><field name="partner_id"/></list></field></record>
+  <record id="vehicle_form" model="ir.ui.view"><field name="name">workshop.vehicle.form</field><field name="model">workshop.vehicle</field><field name="arch" type="xml"><form><sheet><group><field name="plate"/><field name="make_model"/><field name="partner_id"/><field name="company_id" groups="base.group_multi_company"/></group></sheet></form></field></record>
+  <record id="job_action" model="ir.actions.act_window"><field name="name">Job Cards</field><field name="res_model">workshop.job</field><field name="view_mode">list,form</field></record>
+  <record id="vehicle_action" model="ir.actions.act_window"><field name="name">Customer Vehicles</field><field name="res_model">workshop.vehicle</field><field name="view_mode">list,form</field></record>
+  <menuitem id="menu_root" name="Workshop Hub" sequence="5" groups="workshop_hub.group_manager,workshop_hub.group_technician"/>
+  <menuitem id="menu_jobs" name="Job Cards" parent="menu_root" action="job_action"/>
+  <menuitem id="menu_vehicles" name="Vehicles" parent="menu_root" action="vehicle_action" groups="workshop_hub.group_manager"/>
+</odoo>

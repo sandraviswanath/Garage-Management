@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_vehicle_manager,vehicle manager,model_workshop_vehicle,group_manager,1,1,1,0
+access_job_manager,job manager,model_workshop_job,group_manager,1,1,1,0
+access_check_manager,check manager,model_workshop_check,group_manager,1,1,1,1
+access_photo_manager,photo manager,model_workshop_photo,group_manager,1,1,1,1
+access_part_manager,part manager,model_workshop_part_request,group_manager,1,1,1,0
+access_vehicle_technician,vehicle technician,model_workshop_vehicle,group_technician,1,0,0,0
+access_job_technician,job technician,model_workshop_job,group_technician,1,0,0,0
+access_check_technician,check technician,model_workshop_check,group_technician,1,0,0,0
+access_photo_technician,photo technician,model_workshop_photo,group_technician,1,0,0,0
+access_part_technician,part technician,model_workshop_part_request,group_technician,1,0,0,0
+access_task_manager,task manager,model_workshop_task,group_manager,1,1,1,1
+access_task_technician,task technician,model_workshop_task,group_technician,1,0,0,0
+access_note_manager,note manager,model_workshop_note,group_manager,1,1,1,1
+access_note_technician,note technician,model_workshop_note,group_technician,1,0,0,0
+access_time_manager,time manager,model_workshop_time,group_manager,1,1,1,1
+access_time_technician,time technician,model_workshop_time,group_technician,1,0,0,0

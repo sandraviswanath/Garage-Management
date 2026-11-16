@@ -1,0 +1,8 @@
+'use client';
+import {FormEvent,useState} from 'react';
+import {useRouter} from 'next/navigation';
+export default function StaffLogin(){
+ const [error,setError]=useState(''),[busy,setBusy]=useState(false);const router=useRouter();
+ async function submit(event:FormEvent<HTMLFormElement>){event.preventDefault();setBusy(true);setError('');try{const payload=Object.fromEntries(new FormData(event.currentTarget));const response=await fetch('/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const data=await response.json();if(!response.ok)throw new Error(data.error);router.push(data.user.role==='customer'?'/':'/'+data.user.role);}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
+ return <div className="staff-login"><section><a className="brand" href="/">Workshop Hub</a><p className="eyebrow">THE COMPLETE WORKSHOP WORKDAY</p><h1>From reception<br/>to the road.</h1><p>Customers, repairs, parts, people and payments.<br/>Your whole workshop, connected.</p></section><form className="card" onSubmit={submit}><span className="pill">STAFF ACCESS</span><h2>Welcome to your workspace</h2><p>Admin · Manager · Reception · Accounts · Technician</p>{error&&<p className="alert error" role="alert">{error}</p>}<label>Email / username<input name="login" type="text" autoComplete="username" required/></label><label>Password<input name="password" type="password" autoComplete="current-password" required/></label><button className="primary full" disabled={busy}>{busy?'Signing in…':'Open workspace →'}</button><p><a href="/">Go to customer portal</a></p></form></div>;
+}

@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Copy .env.example to .env and set passwords}
+    volumes: [workshop-db:/var/lib/postgresql/data]
+    healthcheck:
+      test: [CMD-SHELL, pg_isready -U odoo -d postgres]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  odoo:
+    image: odoo:18.0
+    depends_on:
+      db: {condition: service_healthy}
+    ports: ["127.0.0.1:8069:8069"]
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: ${POSTGRES_PASSWORD}
+      WORKSHOP_ALLOWED_ORIGINS: ${WORKSHOP_ALLOWED_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001}
+      WORKSHOP_COOKIE_SECURE: ${WORKSHOP_COOKIE_SECURE:-0}
+      WORKSHOP_ADMIN_PASSWORD: ${WORKSHOP_ADMIN_PASSWORD:?Set an admin password in .env}
+      DEMO_CUSTOMER_EMAIL: ${DEMO_CUSTOMER_EMAIL:-customer@example.com}
+      DEMO_CUSTOMER_PASSWORD: ${DEMO_CUSTOMER_PASSWORD:-}
+      DEMO_TECHNICIAN_EMAIL: ${DEMO_TECHNICIAN_EMAIL:-technician@example.com}
+      DEMO_TECHNICIAN_PASSWORD: ${DEMO_TECHNICIAN_PASSWORD:-}
+    volumes:
+      - workshop-odoo:/var/lib/odoo
+      - ./odoo/addons:/mnt/extra-addons:ro
+      - ./odoo/odoo.conf:/etc/odoo/odoo.conf:ro
+volumes:
+  workshop-db:
+  workshop-odoo:

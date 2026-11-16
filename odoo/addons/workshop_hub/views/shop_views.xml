@@ -1,0 +1,24 @@
+<odoo>
+  <record id="shop_product_form" model="ir.ui.view">
+    <field name="name">product.template.workshop.shop</field><field name="model">product.template</field>
+    <field name="inherit_id" ref="product.product_template_only_form_view"/>
+    <field name="arch" type="xml"><xpath expr="//sheet" position="inside"><group string="Workshop customer parts shop" groups="workshop_hub.group_manager">
+      <field name="workshop_shop_published"/><field name="workshop_compatibility"/>
+      <p>Published, saleable inventory-tracked products appear in the customer shop. Odoo pricelists and taxes determine checkout totals.</p>
+    </group></xpath></field>
+  </record>
+  <record id="shop_sale_form" model="ir.ui.view"><field name="name">sale.order.workshop.shop</field><field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/><field name="arch" type="xml"><xpath expr="//sheet" position="inside">
+      <group string="Customer parts order" invisible="not workshop_shop_order"><field name="workshop_shop_order" readonly="1"/>
+        <field name="workshop_checkout_at" readonly="1"/><field name="workshop_collection_name"/><field name="workshop_collection_phone"/>
+        <field name="workshop_shop_vehicle_id" readonly="1"/><field name="workshop_shop_note"/>
+        <p>Collection and payment at the workshop. Confirm delivery only when goods are handed over; invoice and register actual payments in Odoo.</p>
+      </group></xpath></field>
+  </record>
+  <record id="shop_products_action" model="ir.actions.act_window"><field name="name">Shop Products</field><field name="res_model">product.template</field>
+    <field name="view_mode">list,form</field><field name="domain">[('is_storable','=',True)]</field></record>
+  <record id="shop_orders_action" model="ir.actions.act_window"><field name="name">Customer Parts Orders</field><field name="res_model">sale.order</field>
+    <field name="view_mode">list,form</field><field name="domain">[('workshop_shop_order','=',True),('workshop_checkout_at','!=',False)]</field></record>
+  <menuitem id="menu_shop_products" name="Shop Products" parent="menu_root" action="shop_products_action" groups="workshop_hub.group_manager"/>
+  <menuitem id="menu_shop_orders" name="Parts Orders" parent="menu_root" action="shop_orders_action" groups="workshop_hub.group_manager"/>
+</odoo>

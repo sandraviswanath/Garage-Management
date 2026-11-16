@@ -1,0 +1,537 @@
+[
+  {
+    "route": "/accountant",
+    "fields": [],
+    "actions": []
+  },
+  {
+    "route": "/admin/customer/[id]",
+    "fields": [],
+    "actions": [
+      "fetchCustomerDetails",
+      "fetchServiceDetails"
+    ]
+  },
+  {
+    "route": "/admin/customer/add",
+    "fields": [
+      "name",
+      "email",
+      "phone",
+      "status",
+      "address",
+      "vehicle_number",
+      "vehicle_model",
+      "vehicle_year",
+      "vin"
+    ],
+    "actions": [
+      "handleChange",
+      "handleSubmit",
+      "fetchCustomerData"
+    ]
+  },
+  {
+    "route": "/admin/customer",
+    "fields": [],
+    "actions": [
+      "fetchCustomers",
+      "handleDeleteCustomer"
+    ]
+  },
+  {
+    "route": "/admin/estimates/[id]",
+    "fields": [],
+    "actions": [
+      "handleSendEstimate",
+      "handleApproveEstimate",
+      "handleRejectEstimate"
+    ]
+  },
+  {
+    "route": "/admin/estimates/create",
+    "fields": [],
+    "actions": [
+      "handleAddPart",
+      "handleAddLabor",
+      "handleUpdateQuantity",
+      "handleUpdatePrice",
+      "handleRemoveItem",
+      "handleSubmit"
+    ]
+  },
+  {
+    "route": "/admin/estimates",
+    "fields": [],
+    "actions": [
+      "calculateMetrics",
+      "handleSendEstimate",
+      "handleApproveEstimate",
+      "handleDeleteEstimate",
+      "handleDuplicateEstimate"
+    ]
+  },
+  {
+    "route": "/admin/inventory/add",
+    "fields": [
+      "sku",
+      "name",
+      "description",
+      "category",
+      "supplier_id",
+      "quantity",
+      "min_stock_level",
+      "max_stock_level",
+      "unit_cost",
+      "retail_price",
+      "location"
+    ],
+    "actions": [
+      "handleInputChange",
+      "handleSubmit"
+    ]
+  },
+  {
+    "route": "/admin/inventory",
+    "fields": [],
+    "actions": [
+      "fetchParts",
+      "calculateMetrics",
+      "handleDeletePart",
+      "handleStockAdded"
+    ]
+  },
+  {
+    "route": "/admin/inventory/transactions",
+    "fields": [],
+    "actions": [
+      "calculateSummary"
+    ]
+  },
+  {
+    "route": "/admin/invoices/[id]",
+    "fields": [],
+    "actions": [
+      "fetchInvoice",
+      "fetchCustomer",
+      "fetchPayments",
+      "handleAddPayment",
+      "handleExportPDF",
+      "handleSendReminder",
+      "handleEmailInvoice"
+    ]
+  },
+  {
+    "route": "/admin/invoices/create",
+    "fields": [],
+    "actions": [
+      "handleClickOutside",
+      "fetchJobCards",
+      "completedJobs",
+      "fetchCustomers",
+      "handleJobCardSelect",
+      "handleInputChange",
+      "handleSaveInvoice",
+      "calculateTotal"
+    ]
+  },
+  {
+    "route": "/admin/invoices",
+    "fields": [],
+    "actions": [
+      "fetchInvoices",
+      "handleDeleteInvoice",
+      "handleSendInvoice",
+      "handleExportPDF"
+    ]
+  },
+  {
+    "route": "/admin/jobcards/[id]",
+    "fields": [],
+    "actions": [
+      "fetchJobCard",
+      "fetchVehicleDetails"
+    ]
+  },
+  {
+    "route": "/admin/jobcards/addservice",
+    "fields": [],
+    "actions": [
+      "fetchExistingJobCardData",
+      "fetchParts",
+      "handleAddJobItem",
+      "handleRemoveJobItem",
+      "handleAddPart",
+      "handleRemovePart",
+      "handleDeletePart",
+      "calculateEstimates",
+      "handleSubmit",
+      "handleComplete",
+      "handleClickOutside",
+      "handlePartsSelect"
+    ]
+  },
+  {
+    "route": "/admin/jobcards/create",
+    "fields": [
+      "customer_id",
+      "expected_completion",
+      "job_type",
+      "reported_issues"
+    ],
+    "actions": [
+      "fetchJobCardData",
+      "fetchInitialData",
+      "handleClickOutside",
+      "handleCustomerSelect",
+      "handleVehicleSelect",
+      "handleFormChange",
+      "handleSubmit"
+    ]
+  },
+  {
+    "route": "/admin/jobcards",
+    "fields": [],
+    "actions": [
+      "fetchJobCards",
+      "handleDeleteJobCard",
+      "handleStatusChange",
+      "handleTechnicianAdded",
+      "handleAssignTechnician"
+    ]
+  },
+  {
+    "route": "/admin",
+    "fields": [],
+    "actions": [
+      "fetchDashboardData",
+      "calculateStats",
+      "completedJobs"
+    ]
+  },
+  {
+    "route": "/admin/payments/[id]",
+    "fields": [
+      "paymentAmount",
+      "paymentDate",
+      "paymentMethod",
+      "referenceNumber",
+      "paymentNotes"
+    ],
+    "actions": [
+      "fetchInvoiceAndPayments",
+      "handleAddPayment",
+      "handleDeletePayment"
+    ]
+  },
+  {
+    "route": "/admin/payments/add",
+    "fields": [],
+    "actions": [
+      "fetchInvoices",
+      "generateReceiptNumber",
+      "handleInvoiceSelect",
+      "handlePaymentChange",
+      "handleSubmit",
+      "handlePrintReceipt",
+      "printWindow"
+    ]
+  },
+  {
+    "route": "/admin/payments",
+    "fields": [],
+    "actions": [
+      "fetchPayments",
+      "handlePrintReceipt",
+      "handleRefund",
+      "calculateTotals"
+    ]
+  },
+  {
+    "route": "/admin/reports/jobs",
+    "fields": [],
+    "actions": [
+      "handleClickOutside",
+      "fetchJobSummaryData",
+      "fetchTechniciansList",
+      "calculateMetrics",
+      "completedJobs",
+      "completedJobsData",
+      "exportToExcel",
+      "exportToPDF",
+      "handleFilterChange",
+      "handleTechnicianSelect",
+      "handleExport",
+      "exportUrl"
+    ]
+  },
+  {
+    "route": "/admin/reports/revenue",
+    "fields": [],
+    "actions": [
+      "fetchRevenueData",
+      "calculateMetrics",
+      "handleFilterChange",
+      "exportToExcel",
+      "exportToPDF"
+    ]
+  },
+  {
+    "route": "/admin/reports/technician",
+    "fields": [],
+    "actions": [
+      "calculateOverallMetrics",
+      "handleFilterChange",
+      "handleExport"
+    ]
+  },
+  {
+    "route": "/admin/user/[id]",
+    "fields": [],
+    "actions": []
+  },
+  {
+    "route": "/admin/user/add",
+    "fields": [
+      "name",
+      "email",
+      "password",
+      "role_id"
+    ],
+    "actions": [
+      "handleClickOutside",
+      "handleChange",
+      "handleUserRoleSelect",
+      "handleSubmit",
+      "handleCancel"
+    ]
+  },
+  {
+    "route": "/admin/user",
+    "fields": [],
+    "actions": [
+      "fetchUsers",
+      "handleDeleteUser"
+    ]
+  },
+  {
+    "route": "/admin/vehicles/[id]",
+    "fields": [],
+    "actions": [
+      "fetchVehicleData",
+      "fetchServiceDetails"
+    ]
+  },
+  {
+    "route": "/admin/vehicles/add",
+    "fields": [
+      "customer_id",
+      "registration_number",
+      "vehicle_type",
+      "make",
+      "model",
+      "year",
+      "chassis_number",
+      "engine_number",
+      "km_reading"
+    ],
+    "actions": [
+      "fetchCustomers",
+      "handleClickOutside",
+      "handleInputChange",
+      "handleCustomerSelect",
+      "handleYearSelect",
+      "handleVehicleTypeSelect",
+      "handleSubmit",
+      "fetchVehicleData"
+    ]
+  },
+  {
+    "route": "/admin/vehicles",
+    "fields": [],
+    "actions": [
+      "fetchVehicles",
+      "handleDeleteVehicle"
+    ]
+  },
+  {
+    "route": "/admin/work/[id]",
+    "fields": [],
+    "actions": [
+      "fetchJobCard",
+      "handleTaskUpdate",
+      "fetchVehicleDetails",
+      "fetchTechnicianDetails",
+      "handleDeletePart",
+      "handleStatusChange",
+      "handleTaskStatusChange",
+      "handleTaskNotesChange",
+      "handleMarkAsPaid",
+      "handleMarkAsUnpaid",
+      "calculateProgress",
+      "completedTasks"
+    ]
+  },
+  {
+    "route": "/admin/work/create",
+    "fields": [
+      "jobCardNumber",
+      "vehicleNumber",
+      "vehicleModel",
+      "assignedTechnician",
+      "estimatedCompletion",
+      "priority",
+      "status",
+      "reportedIssue"
+    ],
+    "actions": [
+      "handleInputChange",
+      "handleSubmit"
+    ]
+  },
+  {
+    "route": "/admin/work",
+    "fields": [],
+    "actions": [
+      "handleClickOutside",
+      "fetchJobCards",
+      "fetchTechnicians",
+      "handleTechnicianSelect",
+      "completedAssignments"
+    ]
+  },
+  {
+    "route": "/login",
+    "fields": [
+      "email",
+      "password",
+      "checkbox1"
+    ],
+    "actions": [
+      "handleUserValue",
+      "handleSubmit"
+    ]
+  },
+  {
+    "route": "/manager",
+    "fields": [],
+    "actions": []
+  },
+  {
+    "route": "/.",
+    "fields": [],
+    "actions": []
+  },
+  {
+    "route": "/receptionist/customer/[id]",
+    "fields": [],
+    "actions": []
+  },
+  {
+    "route": "/receptionist/customer/add",
+    "fields": [
+      "name",
+      "email",
+      "phone",
+      "status",
+      "vehicleNumber",
+      "vehicleModel",
+      "vehicleYear",
+      "vin"
+    ],
+    "actions": [
+      "handleChange",
+      "handleSubmit"
+    ]
+  },
+  {
+    "route": "/receptionist/customer",
+    "fields": [],
+    "actions": [
+      "handleDeleteCustomer"
+    ]
+  },
+  {
+    "route": "/receptionist/jobcards/[id]",
+    "fields": [
+      "photoUpload"
+    ],
+    "actions": [
+      "handleStatusChange",
+      "handleTaskStatusChange",
+      "handleTaskNotesChange",
+      "handlePhotoUpload",
+      "handleDeletePhoto",
+      "handlePhotoDescriptionChange",
+      "handleSavePhotoDescription",
+      "handleQuickPhoto",
+      "handlePhotoTypeChange",
+      "completedTasks"
+    ]
+  },
+  {
+    "route": "/receptionist/jobcards/create",
+    "fields": [
+      "customerId",
+      "jobType",
+      "vehicleNumber",
+      "vehicleModel",
+      "assignedTechnician",
+      "estimatedCompletion",
+      "reportedIssue",
+      "specialInstructions"
+    ],
+    "actions": [
+      "handleFormChange",
+      "handleAddJobItem",
+      "handleRemoveJobItem",
+      "handleAddPart",
+      "handleRemovePart",
+      "handleSubmit"
+    ]
+  },
+  {
+    "route": "/receptionist/jobcards",
+    "fields": [],
+    "actions": [
+      "handleDeleteJobCard",
+      "handleStatusChange"
+    ]
+  },
+  {
+    "route": "/receptionist",
+    "fields": [],
+    "actions": []
+  },
+  {
+    "route": "/technician/jobs/[id]",
+    "fields": [
+      "photoType",
+      "photoDescription",
+      "newNote"
+    ],
+    "actions": [
+      "handleStatusChange",
+      "handleTaskStatusChange",
+      "completedTasks",
+      "handleAddNote",
+      "handleMarkPartUsed",
+      "handlePhotoUpload",
+      "handleStartTimer",
+      "handleStopTimer",
+      "calculateTotalTime"
+    ]
+  },
+  {
+    "route": "/technician/jobs",
+    "fields": [],
+    "actions": [
+      "handleQuickAction"
+    ]
+  },
+  {
+    "route": "/technician",
+    "fields": [],
+    "actions": []
+  }
+]
